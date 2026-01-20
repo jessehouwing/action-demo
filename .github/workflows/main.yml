@@ -18,8 +18,8 @@ jobs:
 
 
     - run: |
-        chmod +x .github/.workflows/script.sh
-        .github/.workflows/script.sh
+        chmod +x .github/workflows/script.sh
+        .github/workflows/script.sh
     
     - uses: actions/upload-artifact@v6.0.0
       with:
