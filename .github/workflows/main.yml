@@ -24,4 +24,9 @@ jobs:
     - uses: actions/upload-artifact@v6.0.0
       with:
        name: dist
-       path: ksjdchkjsfhkdshfkjsd
+       path: ksjdchkjsfhkdshfkjs
+
+  called:
+    uses: ./.github/workflows/callable.yml
+    with:
+      param1: test
