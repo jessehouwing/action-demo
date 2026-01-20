@@ -27,6 +27,6 @@ jobs:
        path: ksjdchkjsfhkdshfkjs
 
   called:
-    uses: ./.github/workflows/callable.yaml
+    uses: jessehouwing/action-demo/.github/workflows/callable.yaml@main
     with:
       param1: test
