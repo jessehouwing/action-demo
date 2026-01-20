@@ -18,8 +18,8 @@ jobs:
 
 
     - run: |
-        echo "yay"
-        echo "yay"
+        chmod +x .github/.workflows/script.sh
+        .github/.workflows/script.sh
     
     - uses: actions/upload-artifact@v6.0.0
       with:
