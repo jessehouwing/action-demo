@@ -27,6 +27,6 @@ jobs:
        path: ksjdchkjsfhkdshfkjs
 
   called:
-    uses: ./.github/workflows/callable.yml
+    uses: ./.github/workflows/callable.yaml
     with:
       param1: test
