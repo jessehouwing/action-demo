@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Input parameter: ${{ inputs.param1 }}"
+          echo "Input parameter: ${{ inputs.param1 }} 👍"
   job2:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Input parameter: ${{ inputs.param1 }}"
+          echo "Input parameter: ${{ inputs.param1 }} 👍"
   job3:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Input parameter: ${{ inputs.param1 }}"
+          echo "Input parameter: ${{ inputs.param1 }} 👍"
