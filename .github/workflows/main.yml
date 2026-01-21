@@ -19,15 +19,73 @@ jobs:
     - uses: ./.github/actions/setup-repo/
     
     - run: |
-        chmod +x .github/workflows/script.sh
-        .github/workflows/script.sh
+        # dotnet restore
+        # dotnet build --no-restore --configuration Release
+        # dotnet test --no-build --verbosity normal --configuration Release
+      shell: pwsh
     
     - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
+      if: (!cancelled())
       with:
        name: dist
        path: .
 
-  called:
-    uses: jessehouwing/action-demo/.github/workflows/callable.yaml@v2
-    with:
-      param1: test
+    - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
+      if: (!cancelled())
+      with:
+       name: integration-tests
+       path: .
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: (!cancelled())
+      with:
+        files: |
+          test-results/**/*.xml
+          test-results/**/*.trx
+          test-results/**/*.json
+        
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+      with: 
+        fetch-depth: 1
+        path: src
+    - uses: actions/download-artifact@v4
+      with:
+        name: dist
+        path: dist
+    
+    - uses: azure/login@v2
+      if: false
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        environment: 'AzureStack'
+        enable-AzPSSession: true
+
+    - name: Deploy to Dev Environment
+      run: |
+        echo "Deploying to Dev Environment..."
+
+  test-dev:
+    runs-on: ubuntu-latest
+    needs: [deploy-dev, build]
+    #add matrix for 4 test shards
+
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4]
+
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: integrsation-tests
+
+    - name: Run Integration Tests
+      run: |
+        echo "Running integration tests against Dev Environment... Shard: ${{ matrix.shard }}"
+        # dotnet test --no-build --verbosity normal --configuration Release --filter "TestCategory=Integration&Shard=${{ matrix.shard }}"
