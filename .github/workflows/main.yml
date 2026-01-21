@@ -16,14 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
-    - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-      with:
-        node-version: v24
-        
-    - uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 #v5.1.0
-      with:
-        dotnet-version: '8.0.x'
-
+    - uses: ./.github/actions/setup-repo/
+    
     - run: |
         chmod +x .github/workflows/script.sh
         .github/workflows/script.sh
