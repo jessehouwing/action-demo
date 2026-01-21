@@ -1,0 +1,19 @@
+name: lint codebase
+
+on:
+  pull_request: 
+  push:
+  workflow_dispatch: 
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - uses: ./.github/actions/setup-repo/
