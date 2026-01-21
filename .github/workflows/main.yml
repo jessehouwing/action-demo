@@ -16,6 +16,13 @@ jobs:
     steps:
     - uses: actions/checkout@v6.0.2
 
+    - uses: actions/setup-node@v6.2.0
+      with:
+        node-version: v24
+        
+    - uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '8.0.x'
 
     - run: |
         chmod +x .github/workflows/script.sh
