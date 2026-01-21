@@ -26,7 +26,7 @@ jobs:
 
     - run: |
         chmod +x .github/workflows/script.sh
-        .github/workflows/script.sh ${{ secrets.AZURE_TOKEN }}
+        .github/workflows/script.sh
     
     - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
       with:
