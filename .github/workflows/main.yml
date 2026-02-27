@@ -24,13 +24,13 @@ jobs:
         # dotnet test --no-build --verbosity normal --configuration Release
       shell: pwsh
     
-    - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
+    - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #v7.0.0
       if: (!cancelled())
       with:
        name: dist
        path: .
 
-    - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
+    - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #v7.0.0
       if: (!cancelled())
       with:
        name: integration-tests
